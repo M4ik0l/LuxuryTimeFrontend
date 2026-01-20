@@ -1,0 +1,144 @@
+<nav class="navbar">
+  
+  <div class="nav-left">
+    <button class="hamburger-btn" (click)="toggleMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+
+    <ul class="nav-links desktop-only">
+      <li routerLink="/prodotti" style="cursor: pointer;">Acquista</li>
+      <li routerLink="/supporto" style="cursor: pointer;">Supporto</li>
+    </ul>
+  </div>
+
+  <div class="nav-center">
+    <div class="logo" routerLink="/">LUXURY<span>TIME</span></div>
+  </div>
+
+  <div class="nav-right">
+    <div class="search-box">
+      <input type="text" placeholder="Cerca orologi..." class="search-input" [(ngModel)]="testoRicerca" (keyup.enter)="eseguiRicerca()">
+      <svg class="search-icon" (click)="eseguiRicerca()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </div>
+
+    <div class="icon-wrapper" [title]="isLoggedIn ? 'Il mio Profilo' : 'Accedi'">
+      <svg *ngIf="!isLoggedIn" (click)="login()" class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="cursor: pointer;">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      
+      <svg *ngIf="isLoggedIn" routerLink="/profilo" class="nav-icon logged-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="cursor: pointer;">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </div>
+
+    <div class="icon-wrapper" routerLink="/wishlist" title="I Miei Preferiti">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span class="badge" *ngIf="isLoggedIn && wishlistService.getWishlist().length > 0">
+        {{ wishlistService.getWishlist().length }}
+      </span>
+    </div>
+
+    <div class="icon-wrapper" (click)="carrelloService.toggleCart()" title="Carrello">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+      <span class="badge" *ngIf="isLoggedIn && quantitaCarrello > 0">
+        {{ quantitaCarrello }}
+      </span>
+    </div>
+  </div>
+
+<div class="menu-overlay" [class.open]="isMenuOpen" (click)="chiudiMenu()"></div>
+
+<div class="side-menu-drawer" [class.open]="isMenuOpen">
+  
+  <div class="menu-header">
+    <div class="logo menu-logo" routerLink="/" (click)="chiudiMenu()">LUXURY<span>TIME</span></div>
+    <button class="close-menu-btn" (click)="chiudiMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+
+  <div class="menu-content">
+    
+    <div class="quick-actions-grid">
+      
+      <div class="action-box" *ngIf="!isLoggedIn" (click)="chiudiMenu(); login()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <span>Profilo</span>
+      </div>
+
+      <div class="action-box" *ngIf="isLoggedIn" routerLink="/profilo" (click)="chiudiMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <span>Profilo</span>
+      </div>
+
+      <div class="action-box" routerLink="/wishlist" (click)="chiudiMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        <span>Preferiti</span>
+      </div>
+
+      <div class="action-box" routerLink="/supporto" (click)="chiudiMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>Trovaci</span>
+      </div>
+
+    </div>
+
+    <ul class="drawer-nav-list">
+      <li class="section-title">COLLEZIONI</li>
+      
+      <li>
+        <a routerLink="/prodotti" (click)="chiudiMenu()">TUTTI GLI OROLOGI</a>
+      </li>
+      
+      <li>
+        <a routerLink="/prodotti" [queryParams]="{ marca: 'ROLEX' }" (click)="chiudiMenu()">ROLEX</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </li>
+
+      <li>
+        <a routerLink="/prodotti" [queryParams]="{ marca: 'CARTIER' }" (click)="chiudiMenu()">CARTIER</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </li>
+
+      <li>
+        <a routerLink="/prodotti" [queryParams]="{ marca: 'OMEGA' }" (click)="chiudiMenu()">OMEGA</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </li>
+
+      <li>
+        <a routerLink="/prodotti" [queryParams]="{ marca: 'AUDEMARS PIGUET' }" (click)="chiudiMenu()">AUDEMARS PIGUET</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </li>
+
+      <li class="highlight-gold">
+        <a routerLink="/prodotti" [queryParams]="{ edizioneLimitata: 'true' }" (click)="chiudiMenu()">
+          EDIZIONE LIMITATA
+        </a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      </li>
+      
+      <li class="highlight-red">
+        <a routerLink="/prodotti" [queryParams]="{ sconto: 'true' }" (click)="chiudiMenu()">OFFERTE SPECIALI</a>
+      </li>
+    </ul>
+
+  </div>
+</div>

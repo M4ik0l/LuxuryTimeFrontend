@@ -1,0 +1,308 @@
+<div class="layout-container">
+  
+  <main class="prodotti-container">
+    
+    <div class="prodotti-header">
+      <div class="header-left">
+        <h2>LA NOSTRA COLLEZIONE</h2>
+        <span>{{ prodottiFiltrati.length }} Segnatempo Esclusivi</span>
+      </div>
+    </div>
+
+    <div class="luxury-ticker">
+      <div class="ticker-content">
+        <div class="brand-box"><img src="/images/BannerBrand/rolex-logo-black-and-white.png" alt="Rolex"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/audemars-piguet-logo-black-and-white.png" alt="Audemars Piguet"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/patek-philippe-logo-black-and-white.png" alt="Patek Philippe"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/cartier-3-logo-png-transparent.png" alt="Cartier"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/png-clipart-hublot-brand-logo-watch-bucherer-rolex-text-logo.png" alt="Hublot"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/breitling-1-logo-black-and-white.png" alt="Breitling"></div>
+        <div class="brand-box" style="padding: 25px;"><img src="/images/BannerBrand/Panerai-Logo.png" alt="Panerai"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/omega-logo-black-and-white.png" alt="Omega"></div>
+
+        <div class="brand-box"><img src="/images/BannerBrand/rolex-logo-black-and-white.png" alt="Rolex"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/audemars-piguet-logo-black-and-white.png" alt="Audemars Piguet"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/patek-philippe-logo-black-and-white.png" alt="Patek Philippe"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/cartier-3-logo-png-transparent.png" alt="Cartier"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/png-clipart-hublot-brand-logo-watch-bucherer-rolex-text-logo.png" alt="Hublot"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/breitling-1-logo-black-and-white.png" alt="Breitling"></div>
+        <div class="brand-box" style="padding: 25px;"><img src="/images/BannerBrand/Panerai-Logo.png" alt="Panerai"></div>
+        <div class="brand-box"><img src="/images/BannerBrand/omega-logo-black-and-white.png" alt="Omega"></div>
+      </div>
+    </div>
+
+    <div class="info-banner-dark" *ngIf="!caricamento">
+      <div class="info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        SPEDIZIONE GRATUITA 24/48H
+      </div>
+      <div class="info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        VISIONA E PROVA IN BOUTIQUE
+      </div>
+      <div class="info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+        CERTIFICATO DI AUTENTICITÀ
+      </div>
+      <div class="info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 14 4 9 9 4"></polyline>
+          <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+        </svg>
+        RESO FACILE E GRATUITO
+      </div>
+    </div>
+
+    <div class="toolbar-superiore" *ngIf="!caricamento">
+      <button class="btn-more-filter" (click)="apriFiltri()">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="1.5" fill="none"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="10" y1="18" x2="14" y2="18"></line></svg>
+        ALTRI FILTRI
+      </button>
+
+      <div class="ordinamento-box">
+        <select [value]="ordinamento" (change)="impostaOrdinamento($event)">
+           <option value="">Ordina per: Rilevanza</option>
+           <option value="prezzoCresc">Prezzo: Dal più basso</option>
+           <option value="prezzoDecresc">Prezzo: Dal più alto</option>
+           <option value="annoDecresc">Anno: Dal più recente</option>
+           <option value="annoCresc">Anno: Dal meno recente</option>
+           <option value="ultimiAggiunti">Ultimi Arrivi</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filtri-overlay" *ngIf="isFiltriAperti" (click)="chiudiFiltri()"></div>
+
+    <div class="filtri-sidebar" [class.aperta]="isFiltriAperti">
+      
+      <div class="sidebar-header">
+        <div class="header-title">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="10" y1="18" x2="14" y2="18"></line></svg>
+          FILTRI
+        </div>
+        <button class="btn-close" (click)="chiudiFiltri()">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('marca')">
+            MARCA
+            <svg class="chevron" [class.ruotato]="menuAperti['marca']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['marca']">
+            <label class="custom-checkbox" *ngFor="let marca of marcheDisponibili">
+              <input type="checkbox" [checked]="marcheSelezionate.includes(marca)" (change)="toggleSelezione(marcheSelezionate, marca)"> {{ marca }}
+            </label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('prezzo')">
+            FILTRO PREZZI
+            <svg class="chevron" [class.ruotato]="menuAperti['prezzo']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['prezzo']">
+            <label class="custom-checkbox"><input type="checkbox" [checked]="prezziSelezionati.includes('sotto5')" (change)="toggleSelezione(prezziSelezionati, 'sotto5')"> Sotto 5.000 €</label>
+            <label class="custom-checkbox"><input type="checkbox" [checked]="prezziSelezionati.includes('tra5e10')" (change)="toggleSelezione(prezziSelezionati, 'tra5e10')"> 5.000 € - 10.000 €</label>
+            <label class="custom-checkbox"><input type="checkbox" [checked]="prezziSelezionati.includes('tra10e20')" (change)="toggleSelezione(prezziSelezionati, 'tra10e20')"> 10.000 € - 20.000 €</label>
+            <label class="custom-checkbox"><input type="checkbox" [checked]="prezziSelezionati.includes('tra20e40')" (change)="toggleSelezione(prezziSelezionati, 'tra20e40')"> 20.000 € - 40.000 €</label>
+            <label class="custom-checkbox"><input type="checkbox" [checked]="prezziSelezionati.includes('sopra40')" (change)="toggleSelezione(prezziSelezionati, 'sopra40')"> Oltre 40.000 €</label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('cassa')">
+            MATERIALE CASSA
+            <svg class="chevron" [class.ruotato]="menuAperti['cassa']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['cassa']">
+            <label class="custom-checkbox" *ngFor="let cassa of casseDisponibili">
+            <input type="checkbox" [checked]="casseSelezionate.includes(cassa)" (change)="toggleSelezione(casseSelezionate, cassa)"> {{ cassa.split('_').join(' ') }} 
+            </label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('cinturino')">
+            MATERIALE CINTURINO
+            <svg class="chevron" [class.ruotato]="menuAperti['cinturino']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['cinturino']">
+            <label class="custom-checkbox" *ngFor="let cinturino of cinturiniDisponibili">
+            <input type="checkbox" [checked]="cinturiniSelezionati.includes(cinturino)" (change)="toggleSelezione(cinturiniSelezionati, cinturino)"> {{ cinturino.split('_').join(' ') }} 
+            </label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('vetro')">
+            MATERIALE VETRO
+            <svg class="chevron" [class.ruotato]="menuAperti['vetro']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['vetro']">
+            <label class="custom-checkbox" *ngFor="let vetro of vetriDisponibili">
+              <input type="checkbox" [checked]="vetriSelezionati.includes(vetro)" (change)="toggleSelezione(vetriSelezionati, vetro)"> {{ vetro }}
+            </label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('acqua')">
+             RESISTENZA ACQUA
+            <svg class="chevron" [class.ruotato]="menuAperti['acqua']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['acqua']">
+            <label class="custom-checkbox" *ngFor="let acqua of impermeabilitaDisponibili">
+              <input type="checkbox" [checked]="impermeabilitaSelezionate.includes(acqua)" (change)="toggleSelezione(impermeabilitaSelezionate, acqua)"> {{ acqua }}
+            </label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('garanzia')">
+            GARANZIA
+            <svg class="chevron" [class.ruotato]="menuAperti['garanzia']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['garanzia']">
+            <label class="custom-checkbox" *ngFor="let garanzia of garanzieDisponibili">
+              <input type="checkbox" [checked]="garanzieSelezionate.includes(garanzia)" (change)="toggleSelezione(garanzieSelezionate, garanzia)"> {{ garanzia }}
+            </label>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('diametro')">
+            DIMENSIONE CASSA
+            <svg class="chevron" [class.ruotato]="menuAperti['diametro']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body" *ngIf="menuAperti['diametro']">
+            <div class="filter-search-box">
+              <input type="text" placeholder="Search..." [(ngModel)]="ricercaDiametro">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="#999" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div class="scrollable-list">
+              <label class="custom-checkbox" *ngFor="let diametro of diametriDisponibili">
+                <input type="checkbox" [checked]="diametriSelezionati.includes(diametro)" (change)="toggleSelezione(diametriSelezionati, diametro)"> {{ diametro }}
+              </label>
+              <div *ngIf="diametriDisponibili.length === 0" style="font-size: 12px; color: #888;">Nessun risultato</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('colore')">
+            COLORE QUADRANTE
+            <svg class="chevron" [class.ruotato]="menuAperti['colore']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['colore']">
+            <label class="custom-checkbox" *ngFor="let colore of coloriDisponibili">
+              <input type="checkbox" [checked]="coloriSelezionati.includes(colore)" (change)="toggleSelezione(coloriSelezionati, colore)"> {{ colore }}
+            </label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('limitata')">
+            EDIZIONI SPECIALI
+            <svg class="chevron" [class.ruotato]="menuAperti['limitata']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body" *ngIf="menuAperti['limitata']">
+            <label class="custom-checkbox">
+              <input type="checkbox" [(ngModel)]="edizioneLimitata"> Solo Edizioni Limitate
+            </label>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" (click)="toggleMenu('condizione')">
+            CONDIZIONI
+            <svg class="chevron" [class.ruotato]="menuAperti['condizione']" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="accordion-body scrollable-list" *ngIf="menuAperti['condizione']">
+            <label class="custom-checkbox" *ngFor="let cond of condizioniDisponibili">
+              <input type="checkbox" [checked]="condizioniSelezionate.includes(cond)" (change)="toggleSelezione(condizioniSelezionate, cond)"> {{ cond }}
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="btn-sidebar-reset" (click)="pulisciFiltri()">RESET</button>
+        <button class="btn-sidebar-show" (click)="chiudiFiltri()">MOSTRA {{ prodottiFiltrati.length }} RISULTATI</button>
+      </div>
+
+    </div>
+
+    <div *ngIf="caricamento" class="loader">
+      Attendere, caricamento catalogo...
+    </div>
+
+    <div class="items-count-label" *ngIf="!caricamento">
+      {{ prodottiFiltrati.length }} ARTICOLI
+    </div>
+
+    <div class="griglia" *ngIf="!caricamento">
+      <div class="card" *ngFor="let p of prodottiFiltrati" [ngClass]="{'prodotto-finito': p.quantita <= 0}">
+        
+        <div class="clickable-area" [routerLink]="['/prodotto', p.id!]">
+          
+          <div class="immagine-box">
+            <div class="badge-sconto" *ngIf="p.prezzoScontato && p.prezzoScontato > 0 && p.quantita > 0">SALE</div>
+            <div class="badge-esaurito" *ngIf="p.quantita <= 0">ESAURITO</div>
+            
+            <button class="btn-wishlist-catalog" (click)="toggleFavorite($event, p)">
+              <svg *ngIf="!wishlistService.isInWishlist(p.id!)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <svg *ngIf="wishlistService.isInWishlist(p.id!)" viewBox="0 0 24 24" fill="#d90000" stroke="#d90000" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+            </button>
+            
+            <img [src]="(p.immagini && p.immagini.length > 0 && p.immagini[0] !== '') ? p.immagini[0] : 'assets/no-foto.png'" alt="{{ p.nome }}">
+          </div>
+          
+          <div class="info-prodotto">
+            <div class="marca">{{ p.marca }}</div>
+            <div class="modello">{{ p.nome }}</div>
+            
+            <div class="prezzo-container">
+              <ng-container *ngIf="p.prezzoScontato && p.prezzoScontato > 0; else prezzoNormale">
+                <span class="prezzo-barrato">{{ p.prezzo | number:'1.0-0':'it-IT' }} €</span>
+                <span class="prezzo-rosso">{{ p.prezzoScontato | number:'1.0-0':'it-IT' }} €</span>
+              </ng-container>
+              <ng-template #prezzoNormale>
+                <span class="prezzo">{{ p.prezzo | number:'1.0-0':'it-IT' }} €</span>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer-info">
+          <div class="footer-item">
+            <svg class="icon-green-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>{{ p.condizione || 'OTTIMO STATO' | uppercase }}</span>
+          </div>
+          <div class="footer-item">
+            <svg class="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>{{ p.anno || 'N/A' }}</span>
+          </div>
+        </div>
+
+        <button 
+          class="btn-carrello-rapido" 
+          (click)="aggiungiAlCarrello(p.id!)"
+          [disabled]="p.quantita <= 0"
+          [ngClass]="{'esaurito': p.quantita <= 0}">
+          {{ p.quantita > 0 ? 'Aggiungi al carrello' : 'Esaurito' }}
+        </button>
+
+      </div>
+    </div>
+
+  </main>
+</div>

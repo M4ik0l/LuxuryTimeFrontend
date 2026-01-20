@@ -1,0 +1,220 @@
+<main class="homepage-wrapper">
+  
+  <section class="hero-section">
+    <video #heroVideo autoplay loop muted playsinline class="hero-video">
+        <source src="/The_Watch_Luxury_Video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Acquista Orologi di Lusso</h1>
+      <p class="hero-subtitle">La destinazione principale in Italia per i segnatempo più esclusivi al mondo. Autenticità garantita al 100%.</p>
+      
+      <div class="hero-actions center-btn">
+        <a routerLink="/prodotti" class="btn-primary-luxury">ACQUISTA ORA</a>
+        </div>
+    </div>
+  </section>
+    
+  <section class="brands-section">
+    <h2 class="brand-section-title">SHOP BY BRAND</h2>
+    <p class="brand-section-subtitle">Esplora i segnatempo dei marchi più prestigiosi al mondo.</p>
+    
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left-arrow" (click)="scorriCarosello(brandScroll, -1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="brands-carousel" #brandScroll>
+      
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'ROLEX' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Rolex.jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/RolexLogo.PNG" alt="Rolex Logo" class="brand-logo-img" style="width: 75%; max-width: 300px;">
+                  </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'ROLEX' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP ROLEX
+                </a>
+            </div>
+
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'AUDEMARS PIGUET' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Aumdemars Piguet.jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/AudemarsPiguetLogo.PNG" alt="Rolex Logo" class="brand-logo-img" style="width: 80%; max-width: 300px;">
+                  </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'AUDEMARS PIGUET' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP AUDEMARS WATCHES
+                </a>
+            </div>
+
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'PATEK PHILIPPE' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Paktek Philippe.jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/PatekPhilippeLogo.PNG" alt="Patek Philippe Logo" class="brand-logo-img" style="width: 80%; max-width: 300px;">
+                  </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'PATEK PHILIPPE' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP PATEK WATCHES
+                </a>
+            </div>
+
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'CARTIER' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Cartier .jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/Cartier.png" alt="Cartier Logo" class="brand-logo-img">
+                </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'CARTIER' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP CARTIER
+                </a>
+            </div>
+
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'HUBLOT' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Hublot.jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/HublotLogo.PNG" alt="Hublot Logo" class="brand-logo-img" style="width: 70%; max-width: 300px;">
+                </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'HUBLOT' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP HUBLOT
+                </a>
+            </div>
+
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'BREITLING' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Breitling.jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/BreitlingLogo.PNG" alt="Breitling Logo"class="brand-logo-img" style="width: 75%; max-width: 300px;">
+                </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'BREITLING' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP BREITLING
+                </a>
+            </div>
+
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'PANERAI' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Panerei.jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/PaneraiLogo.PNG" alt="Panerai Logo" class="brand-logo-img" style="width: 70%; max-width: 300px;">
+                </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'PANERAI' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP PANERAI
+                </a>
+            </div>
+
+            <div class="brand-card-wrapper">
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'OMEGA' }" class="brand-card" style="background-image: url('/images/BrandProdotti/Omega.jpg');">
+                    <div class="card-overlay"></div>
+                    <img src="/images/BrandProdotti/OmegaLogo.PNG" alt="Omega Logo" class="brand-logo-img" style="width: 70%; max-width: 300px;">
+                </a>
+                <a [routerLink]="['/prodotti']" [queryParams]="{ marca: 'OMEGA' }" class="shop-brand-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    SHOP OMEGA WATCHES
+                </a>
+            </div>
+        </div>
+
+      <button class="nav-arrow right-arrow" (click)="scorriCarosello(brandScroll, 1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="featured-watches">
+    <h2 class="section-title">In Evidenza</h2>
+    <div class="section-divider"></div>
+
+    <div class="loading-spinner" *ngIf="isLoading">Caricamento vetrina...</div>
+
+    <div class="carousel-wrapper" *ngIf="!isLoading">
+      <button class="nav-arrow left-arrow" (click)="scorriCarosello(watchScroll, -1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="watches-carousel" #watchScroll>
+        
+        <div class="card" *ngFor="let p of orologiInEvidenza" [ngClass]="{'prodotto-finito': p.quantita <= 0}">
+          
+          <button class="wishlist-btn" (click)="toggleFavorite($event, p)">
+            <svg *ngIf="!wishlistService.isInWishlist(p.id!)" class="heart-icon outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <svg *ngIf="wishlistService.isInWishlist(p.id!)" class="heart-icon filled" viewBox="0 0 24 24" fill="#b02a37">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+            </svg>
+          </button>
+
+          <div class="clickable-area" [routerLink]="['/prodotto', p.id!]">
+            
+            <div class="immagine-box">
+              <div class="badge-sconto" *ngIf="p.prezzoScontato && p.prezzoScontato > 0 && p.quantita > 0">SALE</div>
+              
+              <div class="badge-esaurito" *ngIf="p.quantita <= 0">ESAURITO</div>
+              
+              <img [src]="(p.immagini && p.immagini.length > 0 && p.immagini[0] !== '') ? p.immagini[0] : 'assets/no-foto.png'" alt="{{ p.nome }}">
+            </div>
+            
+            <div class="info-prodotto">
+              <div class="marca">{{ p.marca }}</div>
+              <div class="modello">{{ p.nome }}</div>
+              
+              <div class="prezzo-container">
+                <ng-container *ngIf="p.prezzoScontato && p.prezzoScontato > 0; else prezzoNormale">
+                  <span class="prezzo-barrato">{{ p.prezzo | number:'1.0-0':'it-IT' }} €</span>
+                  <span class="prezzo-rosso">{{ p.prezzoScontato | number:'1.0-0':'it-IT' }} €</span>
+                </ng-container>
+                <ng-template #prezzoNormale>
+                  <span class="prezzo">{{ p.prezzo | number:'1.0-0':'it-IT' }} €</span>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer-info">
+            <div class="footer-item">
+              <svg class="icon-green-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>{{ p.condizione || 'OTTIMO STATO' | uppercase }}</span>
+            </div>
+            <div class="footer-item">
+              <svg class="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span>{{ p.anno || 'N/A' }}</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="view-all-container">
+        <a routerLink="/prodotti" class="btn-black-view-all">VIEW ALL <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="9 5 19 5 19 15"></polyline></svg></a>
+      </div>
+
+      <button class="nav-arrow right-arrow" (click)="scorriCarosello(watchScroll, 1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+    <div class="luxury-ticker">
+        <div class="ticker-content">
+            <div class="brand-box"><img src="/images/BannerBrand/rolex-logo-black-and-white.png" alt="Rolex"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/audemars-piguet-logo-black-and-white.png" alt="Audemars Piguet"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/patek-philippe-logo-black-and-white.png" alt="Patek Philippe"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/cartier-3-logo-png-transparent.png" alt="Cartier"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/png-clipart-hublot-brand-logo-watch-bucherer-rolex-text-logo.png" alt="Hublot"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/breitling-1-logo-black-and-white.png" alt="Breitling"></div>
+            <div class="brand-box" style="padding: 25px;"><img src="/images/BannerBrand/Panerai-Logo.png" alt="Panerai"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/omega-logo-black-and-white.png" alt="Omega"></div>
+
+            <div class="brand-box"><img src="/images/BannerBrand/rolex-logo-black-and-white.png" alt="Rolex"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/audemars-piguet-logo-black-and-white.png" alt="Audemars Piguet"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/patek-philippe-logo-black-and-white.png" alt="Patek Philippe"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/cartier-3-logo-png-transparent.png" alt="Cartier"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/png-clipart-hublot-brand-logo-watch-bucherer-rolex-text-logo.png" alt="Hublot"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/breitling-1-logo-black-and-white.png" alt="Breitling"></div>
+            <div class="brand-box" style="padding: 25px;"><img src="/images/BannerBrand/Panerai-Logo.png" alt="Panerai"></div>
+            <div class="brand-box"><img src="/images/BannerBrand/omega-logo-black-and-white.png" alt="Omega"></div>
+        </div>
+    </div>
+</main>

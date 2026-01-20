@@ -1,0 +1,284 @@
+.luxury-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Creo due colonne affiancate */
+.main-content-split {
+  display: flex;
+  gap: 60px; /* Spazio vuoto tra le foto e il testo */
+  align-items: flex-start;
+}
+
+/* Colonna sinistra (Foto) */
+.visual-gallery {
+  flex: 1; 
+  position: sticky;
+  top: 100px;
+}
+
+
+.hero-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.hero-image-container img {
+  max-width: 100%;
+  max-height: 550px; /* Altezza massima bloccata */
+  object-fit: contain;
+}
+
+/* Colonna destra (Testi) */
+.product-info-vault {
+  flex: 1;
+}
+
+/* Stile Miniature */
+.thumbnails-track {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.thumb-item {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #eaeaea;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.thumb-item:hover, .thumb-item.active {
+  opacity: 1;
+  border-color: #000;
+}
+
+.thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Testi */
+.brand-title {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.full-model-name {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.internal-ref {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 40px;
+}
+
+.price-display {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* Bottoni */
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 80px;
+}
+
+.btn-black-luxury {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  text-transform: uppercase;
+}
+
+.btn-black-luxury.full-width {
+  width: 100%; 
+}
+
+/* Riga sotto il carrello (Appuntamento + Wishlist) */
+.secondary-actions {
+  display: flex;
+  gap: 15px; /* Spazio tra i due bottoni */
+  align-items: stretch; /* Bottoni alla stessa altezza */
+}
+
+/* Bottone Appuntamento */
+.btn-outline-luxury {
+  background: #fff;
+  color: #000;
+  border: 1px solid #eaeaea;
+  padding: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  flex: 2; /* Prende più spazio rispetto al tasto wishlist */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outline-luxury:hover {
+  border-color: #000;
+}
+
+/* Bottone Wishlist */
+.btn-wishlist-black {
+  background-color: #000; 
+  color: #fff; 
+  border: none;
+  padding: 12px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  border-radius: 4px; /* Angoli leggermente smussati */
+  transition: background-color 0.2s ease;
+  flex: 1;
+}
+
+.btn-wishlist-black:hover {
+  background-color: #333;
+}
+
+/* Testo su due righe nel bottone */
+.wishlist-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.action-word {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.target-word {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Icona Cuore */
+.btn-wishlist-black .heart-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.heart-icon.outline-white {
+  color: #fff;
+}
+
+.heart-icon.filled-white {
+  fill: #fff;
+}
+
+.btn-wishlist-black:active .heart-icon {
+  transform: scale(1.2); /* Piccolo rimbalzo al click */
+}
+
+/* Griglia */
+.section-divider-title {
+  font-size: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.specs-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.entry {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #f4f4f4;
+  font-size: 14px;
+}
+
+.limited-edition .val {
+  color: #d4af37;
+  font-weight: bold;
+}
+
+.key {
+  color: #777;
+  font-weight: 300;
+}
+
+.val {
+  color: #000;
+  text-align: right;
+}
+
+/* Modelli esauriti a livello globale */
+.badge-esaurito {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #111111; 
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  z-index: 2;
+  border-radius: 2px;
+}
+
+.prodotto-finito .immagine-box img,
+.prodotto-finito.hero-image-container img {
+  opacity: 0.35;
+  filter: grayscale(100%);
+}
+
+.prodotto-finito:hover .immagine-box img {
+  transform: none;
+}
+
+button.esaurito {
+  background-color: #f0f0f0 !important;
+  color: #999999 !important;
+  cursor: not-allowed;
+  border-color: #eaeaea !important;
+}
+
+.entry.limited-edition .val {
+  color: #d4af37;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+

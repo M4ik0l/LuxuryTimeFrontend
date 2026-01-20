@@ -1,0 +1,88 @@
+<div class="cart-overlay" [class.open]="isOpen" (click)="chiudiCarrello()"></div>
+
+<div class="cart-drawer" [class.open]="isOpen">
+  
+  <div class="cart-header">
+    <h2>CARRELLO</h2>
+    <button class="close-btn" (click)="chiudiCarrello()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+    </button>
+  </div>
+
+  <div class="cart-content">
+    
+    <div *ngIf="!caricamento && articoli.length === 0" class="empty-state">
+      <svg class="bag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+      <h3>Il tuo Carrello</h3>
+      <p>Sembra che tu non abbia ancora aggiunto nulla al carrello.</p>
+      <button class="btn-black-full" (click)="chiudiCarrello()" routerLink="/prodotti">CONTINUA LO SHOPPING</button>
+    </div>
+
+    <div class="cart-items" *ngIf="articoli.length > 0">
+        
+        <div class="timer-banner" [ngClass]="{'scaduto': carrelloScaduto}" style="background-color: #fff3cd; color: #856404; padding: 12px; text-align: center; font-size: 13px; border-bottom: 1px solid #ffeeba; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 15px;">
+          
+          <ng-container *ngIf="!carrelloScaduto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>Articoli riservati per <strong>{{ minuti | number:'2.0-0' }}:{{ secondi | number:'2.0-0' }}</strong></span>
+          </ng-container>
+
+          <ng-container *ngIf="carrelloScaduto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span style="color: #721c24; font-weight: bold;">Tempo Scaduto!</span>
+          </ng-container>
+
+        </div>
+
+        <div class="cart-item" *ngFor="let item of articoli" style="display: flex; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+          
+          <a [routerLink]="['/prodotto', item.prodotto.id]" (click)="chiudiCarrello()" class="cart-product-link" style="display: flex; gap: 15px; flex-grow: 1; text-decoration: none; color: inherit;">
+            <div class="item-img" style="width: 80px; height: 80px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: center;">
+              <img [src]="item.prodotto.immagini && item.prodotto.immagini.length > 0 ? item.prodotto.immagini[0] : 'assets/no-foto.png'" alt="Orologio" style="max-width: 100%; max-height: 100%;">
+            </div>
+            
+            <div class="item-info">
+              <div class="item-brand" style="font-weight: bold; font-size: 12px; text-transform: uppercase;">{{ item.prodotto.marca }}</div>
+              <div class="item-name" style="font-size: 14px; margin: 5px 0;">{{ item.prodotto.nome }}</div>
+              <div class="item-ref" *ngIf="item.prodotto.riferimento" style="font-size: 11px; color: #888;">Ref: {{ item.prodotto.riferimento }}</div>
+            </div>
+          </a>
+          
+          <div class="item-actions-wrapper" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; min-width: 80px;">
+              
+              <button class="remove-btn" (click)="rimuovi(item.id)" [disabled]="aggiornamentoInCorso" title="Rimuovi" style="background: none; border: none; cursor: pointer; color: #999;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width: 16px; height: 16px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+              </button>
+
+              <div class="price" style="font-weight: bold; margin: 10px 0;">{{ (item.prezzo * item.quantita) | number:'1.0-0':'it-IT' }} €</div>
+
+              <div class="item-qty" style="display: flex; align-items: center; gap: 10px; border: 1px solid #eee; padding: 2px 5px;">
+                <button (click)="cambiaQuantita(item, -1)" [disabled]="carrelloScaduto || aggiornamentoInCorso" style="background: none; border: none; cursor: pointer;">-</button>
+                <span>{{ item.quantita }}</span>
+                <button (click)="cambiaQuantita(item, 1)" [disabled]="item.quantita >= item.prodotto.quantita || carrelloScaduto || aggiornamentoInCorso" style="background: none; border: none; cursor: pointer;">+</button>
+              </div>
+
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="cart-footer" *ngIf="articoli.length > 0">
+    <div class="total-row" style="display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; margin-bottom: 15px;">
+      <span>Totale</span>
+      <span>{{ totale | number:'1.0-0':'it-IT' }} €</span>
+    </div>
+    
+    <button class="btn-checkout" 
+            routerLink="/checkout" 
+            (click)="chiudiCarrello()" 
+            [disabled]="carrelloScaduto || aggiornamentoInCorso"
+            [ngStyle]="{'background-color': (carrelloScaduto || aggiornamentoInCorso) ? '#cccccc' : '#000', 'cursor': (carrelloScaduto || aggiornamentoInCorso) ? 'not-allowed' : 'pointer', 'color': 'white', 'width': '100%', 'padding': '15px', 'border': 'none', 'font-weight': 'bold'}">
+      {{ carrelloScaduto ? 'TEMPO SCADUTO' : (aggiornamentoInCorso ? 'AGGIORNAMENTO CARRELLO...' : 'PROCEDI AL PAGAMENTO') }}
+    </button>
+  </div>
+
+</div>

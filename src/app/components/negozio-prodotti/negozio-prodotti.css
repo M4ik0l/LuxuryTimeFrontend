@@ -1,0 +1,586 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
+
+.layout-container {
+  max-width: 1650px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.prodotti-header {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: #ffffff; 
+  padding: 20px 0; 
+  text-align: center; 
+  margin-bottom: 0;
+  margin-bottom: 30px;
+}
+
+.prodotti-header h2 {
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.prodotti-header span {
+  font-size: 13px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* BANNER SCORREVOLE LOGHI BRAND */
+.luxury-ticker {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  background-color: #f3f4f6;
+  padding: 20px 0;
+  display: flex;
+}
+
+.ticker-content {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: scrollTicker 35s linear infinite; 
+}
+
+.luxury-ticker:hover .ticker-content {
+  animation-play-state: paused;
+}
+
+.brand-box {
+  background-color: #ffffff;
+  width: 220px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-right: 15px;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.brand-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@keyframes scrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* TOOLBAR FILTRI E ORDINAMENTO */
+.toolbar-superiore {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5vw;
+  margin-bottom: 30px;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  background-color: #fff;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.btn-more-filter {
+  background-color: #f4f5f7;
+  border: 1px solid #e1e1e1;
+  color: #000;
+  font-size: 12px;
+  font-weight: 540;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 4px;
+}
+
+.btn-more-filter:hover {
+  background-color: #e2e4e9;
+}
+
+.ordinamento-box select {
+  padding: 10px 15px;
+  border: 1px solid #e1e1e1;
+  background-color: #fff;
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+  min-width: 200px;
+  border-radius: 4px;
+}
+
+/* SIDEBAR FILTRI A COMPARSA */
+.filtri-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.filtri-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0; 
+  width: 380px;
+  max-width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+}
+
+.filtri-sidebar.aperta {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000;
+}
+
+.sidebar-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px 25px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #eaeaea;
+}
+
+.accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #000;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevron.ruotato {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  padding: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+.sidebar-footer {
+  display: flex;
+  padding: 20px 25px;
+  gap: 15px;
+  border-top: 1px solid #eaeaea;
+  background-color: #fff;
+}
+
+.btn-sidebar-reset {
+  flex: 1;
+  background-color: #f4f5f7;
+  color: #000;
+  border: none;
+  padding: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.btn-sidebar-show {
+  flex: 2;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* GRIGLIA E CARD */
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.clickable-area {
+  text-decoration: none;
+  color: inherit;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.immagine-box {
+  width: 100%;
+  height: 300px;
+  background: #fdfdfd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.immagine-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .immagine-box img {
+  transform: scale(1.05);
+}
+
+.info-prodotto {
+  text-align: left;
+  padding: 0 20px;
+  flex-grow: 1;
+}
+
+.marca {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.modello {
+  font-size: 15px;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  height: 42px;
+  overflow: hidden;
+}
+
+.prezzo {
+  font-size: 19px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.card-footer-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid #eaeaea;
+  background: #fff;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.icon-green-check { width: 14px; height: 14px; stroke: #28a745; }
+.icon-calendar { width: 14px; height: 14px; stroke: #888; }
+
+.btn-carrello-rapido {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 47px;
+  background: #000;
+  color: #fff;
+  border: none;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card:hover .btn-carrello-rapido {
+  transform: translateY(0);
+}
+
+.btn-carrello-rapido.esaurito {
+  background: #eee;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.loader {
+  text-align: center;
+  padding: 100px;
+  color: #888;
+  font-style: italic;
+}
+
+/* BANNER INFORMATIVO */
+.info-banner-dark {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #222222; 
+  color: #ffffff;
+  padding: 12px 5vw;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.info-item svg {
+  width: 16px;
+  height: 16px;
+  stroke: #ffffff;
+}
+
+/* CONTATORE ARTICOLI */
+.items-count-label {
+  font-size: 13px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* ETICHETTA SALE */
+.immagine-box {
+  position: relative; 
+}
+
+.badge-sconto {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #d90000; 
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  z-index: 2;
+  border-radius: 2px;
+}
+
+/* PREZZI */
+.prezzo-container {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prezzo-barrato {
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.prezzo-rosso {
+  font-size: 19px;
+  color: #d90000;
+  font-weight: 700;
+}
+
+/* STILI PER PRODOTTI ESAURITI */
+
+/* L'etichetta ESAURITO in alto a destra */
+.badge-esaurito {
+  position: absolute;
+  bottom: 10px; 
+  right: 10px;
+  background-color: #111111; 
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  z-index: 2;
+  border-radius: 2px;
+}
+
+/* Fa diventare l'orologio in bianco e nero e mezzo trasparente */
+.prodotto-finito .immagine-box img {
+  opacity: 0.35;
+  filter: grayscale(100%);
+}
+
+/* Stile per il bottone quando l'orologio è finito */
+.btn-carrello-rapido.esaurito {
+  background-color: #f0f0f0;
+  color: #999999;
+  cursor: not-allowed;
+  transform: translateY(0); 
+  border-top: 1px solid #eaeaea;
+}
+
+/* Se l'utente passa il mouse su una card esaurita, l'immagine non deve fare lo zoom */
+.prodotto-finito:hover .immagine-box img {
+  transform: none;
+}
+
+/* TASTO PREFERITI NEL CATALOGO */
+.btn-wishlist-catalog {
+  position: absolute;
+  top: 10px;
+  right: 10px; 
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn-wishlist-catalog:hover {
+  background: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.btn-wishlist-catalog svg {
+  width: 18px;
+  height: 18px;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+  color: #333;
+}

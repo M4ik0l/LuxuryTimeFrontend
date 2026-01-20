@@ -1,0 +1,451 @@
+/* STRUTTURA E CONTENITORI BASE */
+:host {
+  display: block;
+  background-color: #f4f5f7;
+  min-height: 100vh;
+}
+
+.admin-wrapper {
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  border-radius: 8px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* HEADER E NAVIGAZIONE */
+.admin-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.admin-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+  padding: 15px 0;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover { color: #000; }
+
+.tab-btn.active {
+  color: #000;
+  border-bottom: 3px solid #d4af37;
+}
+
+/* BARRA AZIONI SUPERIORE E TITOLI */
+.action-bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.action-bar-top h2, 
+.admin-wrapper > div > h2 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  letter-spacing: 1px;
+  margin: 0 0 20px 0;
+}
+
+/* TABELLE E LISTE */
+.table-container {
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #eaeaea;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  table-layout: auto;
+}
+
+.admin-table th {
+  background: #000;
+  color: #fff;
+  text-align: left;
+  padding: 18px 20px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.admin-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 14px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.admin-table tr:hover { 
+  background: #fdfdfd; 
+}
+
+.admin-table select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  background: #fff;
+}
+
+.td-img img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background: #fff;
+}
+
+/* FIX ALLINEAMENTO COLONNA AZIONI */
+.admin-table th:last-child,
+.admin-table td:last-child {
+  text-align: center !important;
+  min-width: 240px; 
+  vertical-align: middle;
+}
+
+.td-azioni {
+  text-align: center; 
+  white-space: nowrap; /* Impedisce che i bottoni vadano a capo o vengano schiacciati */
+}
+
+.td-azioni button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+/* DETTAGLI ORDINI */
+.details-row td {
+  background: #fafafa;
+  padding: 0;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.order-details-box {
+  padding: 30px;
+  border-left: 4px solid #d4af37;
+}
+
+.order-details-box h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.product-item:last-child { 
+  border-bottom: none; 
+}
+
+/* BOTTONI GLOBALI */
+.btn-nuovo {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.3s;
+  border-radius: 2px;
+}
+
+.btn-nuovo:hover { 
+  background: #333; 
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.btn-icon .material-icons { 
+  font-size: 18px; 
+}
+
+.btn-icon.edit { 
+  color: #000; 
+}
+
+.btn-icon.edit:hover { 
+  background: #f0f0f0; 
+}
+
+.btn-icon.delete { 
+  color: #d90000; 
+}
+
+.btn-icon.delete:hover { 
+  background: #ffe6e6; 
+}
+
+.btn-black-small {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.btn-black-small:hover { 
+  background: #333; 
+}
+
+.btn-danger-small {
+  background: transparent;
+  color: #d90000;
+  border: 1px solid #d90000;
+  padding: 8px 15px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.btn-danger-small:hover { 
+  background: #d90000; 
+  color: #fff; 
+}
+
+.btn-close {
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-close:hover { 
+  border-color: #000; 
+  color: #000; 
+}
+
+/* SEZIONE FORM (AGGIUNGI / MODIFICA) */
+.admin-panel {
+  background: #fafafa;
+  padding: 40px;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.form-header h2 { 
+  font-size: 20px; 
+  margin: 0; 
+}
+
+.sezione-form {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.full-width { 
+  grid-column: span 2; 
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-group input, 
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus { 
+  border-color: #000; 
+  outline: none; 
+}
+
+.btn-salva {
+  margin-top: 40px;
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.btn-salva:hover:not(:disabled) { 
+  background-color: #333; 
+}
+
+.btn-salva:disabled { 
+  background-color: #ccc; 
+  cursor: not-allowed; 
+}
+
+.btn-chiudi {
+  background: transparent;
+  border: 1px solid #000;
+  color: #000;
+  padding: 8px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-chiudi:hover { 
+  background: #000; 
+  color: #fff; 
+}
+
+/* NOTIFICHE E LOADER */
+.alert { 
+  padding: 15px; 
+  margin-bottom: 20px; 
+  border-radius: 2px; 
+  font-size: 14px; 
+  font-weight: 600; 
+}
+
+.alert.success { 
+  background: #e6f9e6; 
+  color: #006600; 
+  border: 1px solid #ccffcc; 
+}
+
+.alert.error { 
+  background: #ffe6e6; 
+  color: #cc0000; 
+  border: 1px solid #ffcccc; 
+}
+
+.loader { 
+  padding: 20px; 
+  text-align: center; 
+  color: #888; 
+  font-style: italic; 
+}
+
+/* BARRA DI RICERCA ADMIN */
+.admin-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.admin-search-box input {
+  width: 100%;
+  padding: 10px 15px 10px 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fdfdfd;
+}
+
+.admin-search-box input:focus {
+  border-color: #000;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.admin-search-box .search-icon {
+  position: absolute;
+  left: 12px;
+  color: #999;
+  font-size: 20px;
+  pointer-events: none;
+}

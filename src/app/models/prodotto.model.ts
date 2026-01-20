@@ -1,0 +1,31 @@
+export interface Prodotto {
+  id?: number;
+  nome: string;
+  marca: string;
+  modello: string;
+  prezzo: number;
+  prezzoScontato?: number;
+  quantita: number;
+  anno: number;
+  descrizione: string;
+  immagini: string[];
+  edizioneLimitata: boolean;
+  condizione?: string;
+  garanzia?: string;
+  collezione?: string;
+  riferimento?: string;
+  genere?: string;
+  certificato?: string;
+  movimento?: string;
+  materialeCassa?: string;
+  materialeCinturino?: string;
+  coloreQuadrante?: string;
+  calibro?: string;
+  tipoVetro?: string;
+  chiusura?: string;
+  resistenzaAcqua?: string;
+  circonferenzaPolso?: string;
+  diametroCassa?: string;
+  categoria?: string;
+  attivo?: boolean;
+}

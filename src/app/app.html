@@ -1,0 +1,106 @@
+<app-navbar></app-navbar> 
+
+<router-outlet></router-outlet>
+<footer class="luxury-footer">
+  
+  <div class="footer-trust-bar">
+    <div class="trust-item">
+      <svg class="luxury-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+      <h4>Spedizione Assicurata</h4>
+      <p>Consegna rapida in 24/48h in tutto il mondo</p>
+    </div>
+    <div class="trust-item">
+      <svg class="luxury-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-5a2 2 0 012-2h2a2 2 0 012 2v5"></path></svg>
+      <h4>Visita la Boutique</h4>
+      <p>Prenota un appuntamento per provare i modelli</p>
+    </div>
+    <div class="trust-item">
+      <svg class="luxury-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+      <h4>Autenticità Garantita</h4>
+      <p>Certificato di autenticità per ogni orologio</p>
+    </div>
+    <div class="trust-item">
+      <svg class="luxury-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
+      <h4>Reso Semplice</h4>
+      <p>14 giorni di tempo per il reso gratuito</p>
+    </div>
+  </div>
+
+  <div class="footer-main">
+    
+    <div class="footer-col">
+      <h3>I NOSTRI SERVIZI</h3>
+      <ul>
+        <li><a routerLink="/supporto">Vendi il tuo orologio</a></li>
+        <li><a routerLink="/supporto">Richiedi una Valutazione</a></li>
+        <li><a routerLink="/supporto">Servizio di Permuta</a></li>
+        <li><a routerLink="/supporto">Revisione e Riparazioni</a></li>
+        <li><a routerLink="/supporto">Ricerca su Commissione</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>ACQUISTA ONLINE</h3>
+      <ul>
+        <li><a routerLink="/prodotti">Tutti gli Orologi</a></li>
+        <li><a routerLink="/prodotti" [queryParams]="{marca: 'Rolex'}">Orologi Rolex</a></li>
+        <li><a routerLink="/prodotti" [queryParams]="{marca: 'Audemars Piguet'}">Audemars Piguet</a></li>
+        <li><a routerLink="/prodotti" [queryParams]="{ ordinamento: 'ultimiAggiunti' }">Ultimi Arrivi</a></li>
+        <li><a routerLink="/prodotti" [queryParams]="{ sconto: 'true' }">In Offerta</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>INFORMAZIONI</h3>
+      <ul>
+        <li><a routerLink="/supporto">Chi Siamo</a></li>
+        <li><a routerLink="/supporto">Contattaci</a></li>
+        <li><a routerLink="/faq">FAQ</a></li>
+        <li><a routerLink="/termini">Termini e Condizioni</a></li>
+        <li><a routerLink="/privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col contact-col">
+      
+        <div class="customer-rating">
+            <div class="stars-container">
+                <span class="material-icons star">star</span>
+                <span class="material-icons star">star</span>
+                <span class="material-icons star">star</span>
+                <span class="material-icons star">star</span>
+                <span class="material-icons star">star_half</span> </div>
+            <p>Valutato <strong>4.9/5</strong> dai nostri clienti</p>
+            </div>
+
+      <h3>DOVE SIAMO</h3>
+      <ul class="contact-info">
+        <li><span class="material-icons">location_on</span> Via Montenapoleone 1, 20121 Milano (MI), Italia.</li>
+        <li><span class="material-icons">phone</span> +39 02 1234 5678</li>
+        <li><span class="material-icons">email</span> info&#64;luxurytime.it</li>
+      </ul>
+
+      <div class="social-icons">
+        <a href="#" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+        </a>
+        <a href="#" title="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a8 8 0 0 1-5-1z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 LuxuryTime S.p.A. Tutti i diritti riservati. P.IVA 12345678901</p>
+  </div>
+</footer>
+<app-carrello></app-carrello>
+
+<app-toast></app-toast>

@@ -1,0 +1,129 @@
+<div class="layout-container">
+  <div class="profile-wrapper">
+    
+    <div class="profile-sidebar">
+      <div class="user-avatar">
+        <span>{{ utente.nome.charAt(0) }}{{ utente.cognome.charAt(0) }}</span>
+      </div>
+      <h3>{{ utente.nome }} {{ utente.cognome }}</h3>
+      <p class="user-email">{{ utente.email }}</p>
+      
+      <ul class="profile-nav">
+        <li [class.active]="tabAttivo === 'dati'" (click)="cambiaTab('dati')">I Miei Dati</li>
+        <li [class.active]="tabAttivo === 'ordini'" (click)="cambiaTab('ordini')">I Miei Ordini</li>
+        
+        <li [class.active]="tabAttivo === 'indirizzi'" (click)="cambiaTab('indirizzi')">Indirizzi di Spedizione</li>
+        
+        <li (click)="logout()" class="logout-link">Esci</li>
+      </ul>
+    </div>
+
+    <div class="profile-content">
+      
+      <div *ngIf="tabAttivo === 'dati'">
+        <h2>Dettagli Account</h2>
+        <div class="section-divider-left"></div>
+
+        <div class="alert success" *ngIf="messaggio">{{ messaggio }}</div>
+        <div class="alert error" *ngIf="errore">{{ errore }}</div>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <label>Nome</label>
+            <div class="info-value">{{ utente.nome }}</div>
+          </div>
+          <div class="info-box">
+            <label>Cognome</label>
+            <div class="info-value">{{ utente.cognome }}</div>
+          </div>
+          <div class="info-box full-width">
+            <label>Email (Non modificabile)</label>
+            <div class="info-value">{{ utente.email }}</div>
+          </div>
+          
+          <div class="info-box full-width phone-box">
+            <label>Numero di Telefono</label>
+            <div class="phone-input-group">
+              <input type="text" [(ngModel)]="nuovoTelefono" placeholder="Inserisci il tuo numero...">
+              <button class="btn-black-small" (click)="salvaTelefono()">AGGIORNA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="tabAttivo === 'ordini'">
+        <h2>Storico Ordini</h2>
+        <div class="section-divider-left"></div>
+
+        <div *ngIf="caricamentoOrdini" class="loader" style="text-align:center; padding:40px; color:#888;">Caricamento ordini in corso...</div>
+
+        <div *ngIf="!caricamentoOrdini && ordini.length === 0" class="empty-state">
+          <p>Non hai ancora effettuato nessun ordine.</p>
+          <button class="btn-black-small" routerLink="/prodotti" style="margin-top:20px; padding:15px 30px;">Inizia lo Shopping</button>
+        </div>
+
+        <div class="orders-list" *ngIf="!caricamentoOrdini && ordini.length > 0">
+          <div class="order-card" *ngFor="let ordine of ordini">
+            
+            <div class="order-header">
+              <div class="order-info-block">
+                <span>Ordine Effettuato</span>
+                <strong>{{ ordine.data | date:'dd MMM yyyy' }}</strong>
+              </div>
+              <div class="order-info-block">
+                <span>Totale</span>
+                <strong>{{ ordine.totale | number:'1.0-0':'it-IT' }} €</strong>
+              </div>
+            <div class="order-info-block">
+              <span>Spedito a</span>
+              <strong *ngIf="ordine.indirizzo">
+                {{ ordine.indirizzo.via }}, {{ ordine.indirizzo.citta }}
+              </strong>
+            </div>
+              <div class="order-id">
+                <span>Ordine # {{ ordine.id }}</span>
+                <span class="badge-status" [ngClass]="{'delivered': ordine.stato === 'Consegnato'}">{{ ordine.stato }}</span>
+              </div>
+            </div>
+
+            <div class="order-items">
+              <div class="ordered-item" *ngFor="let item of ordine.prodotti">
+                <img [src]="item.immagine" alt="Orologio">
+                <div class="item-details">
+                  <h4>{{ item.marca }}</h4>
+                  <p>{{ item.modello }}</p>
+                  <span>Qtà: {{ item.quantita }}</span>
+                </div>
+                <div class="item-price">{{ item.prezzo | number:'1.0-0':'it-IT' }} €</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="tabAttivo === 'indirizzi'">
+        <h2>I Tuoi Indirizzi di Spedizione</h2>
+        <div class="section-divider-left"></div>
+
+        <div *ngIf="caricamentoIndirizzi" class="loader">Recupero indirizzi...</div>
+
+        <div class="address-grid" *ngIf="!caricamentoIndirizzi">
+          <div class="address-card" *ngFor="let addr of indirizzi">
+            <div class="address-icon"><span class="material-icons">home</span></div>
+            <div class="address-info">
+              <strong>{{ addr.via }}, {{ addr.numeroCivico }}</strong>
+              <p>{{ addr.cap }} - {{ addr.citta }}</p>
+              <span class="badge-address" *ngIf="addr.attivo">Principale</span>
+            </div>
+          </div>
+
+          <div *ngIf="indirizzi.length === 0" class="empty-state">
+            <p>Non hai ancora indirizzi salvati. Appariranno qui dopo il tuo primo acquisto.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

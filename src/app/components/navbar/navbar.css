@@ -1,0 +1,333 @@
+/* Struttura principale a 3 colonne */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 90px;
+  background-color: #000;
+  border-bottom: 1px solid #222; /* Riga di separazione */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Flex 1 garantisce che le tre colonne occupino lo stesso spazio centrando il logo */
+.nav-left, .nav-center, .nav-right {
+  flex: 1; 
+  display: flex;
+  align-items: center;
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+
+.nav-center {
+  justify-content: center;
+}
+
+.nav-right {
+  justify-content: flex-end;
+  gap: 25px; /* Spazio tra le icone a destra */
+}
+
+/* LOGO */
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.logo span {
+  color: #d4af37; 
+  font-weight: 700;
+}
+
+/* LINK DI SINISTRA */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-links li:hover {
+  color: #d4af37;
+}
+
+/* BARRA DI RICERCA */
+.search-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 20px; 
+}
+
+/* L'input di testo minimale */
+.search-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #555; 
+  color: #fff; 
+  padding: 5px 25px 5px 0; 
+  font-size: 0.85rem;
+  outline: none;
+  width: 180px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-bottom-color: #d4af37; 
+}
+
+/* Lente di ingrandimento */
+.search-icon {
+  position: absolute;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+/* Effetto hover sulla lente */
+.search-icon:hover {
+  color: #fff;
+}
+
+/* ICONE DI DESTRA */
+.icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.icon-wrapper:hover {
+  color: #d4af37;
+}
+
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+
+.icon-wrapper:hover .nav-icon {
+  transform: translateY(-2px); /* Effetto sollevamento */
+}
+
+/* Dettaglio oro se l'utente è loggato */
+.nav-icon.logged-in {
+  color: #d4af37; 
+}
+
+/* BADGE CONTATORI */
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: #d4af37;
+  color: #000;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000; 
+}
+
+/* TASTO HAMBURGER E GESTIONE DESKTOP/MOBILE */
+.hamburger-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+}
+.hamburger-btn svg { width: 28px; height: 28px; }
+.hamburger-btn:hover { color: #d4af37; }
+
+/* IL MENU LATERALE (DRAWER) */
+.menu-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  opacity: 0; visibility: hidden;
+  transition: all 0.3s ease;
+}
+.menu-overlay.open { opacity: 1; visibility: visible; }
+
+.side-menu-drawer {
+  position: fixed;
+  top: 0; left: 0; /* Si apre da sinistra */
+  width: 400px;
+  height: 100vh;
+  background: #fdfdfd;
+  z-index: 2010;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.side-menu-drawer.open { transform: translateX(0); }
+
+/* Header Menu Interno */
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 90px; 
+  background-color: #000; 
+  border-bottom: 1px solid #222;
+}
+
+.menu-logo { 
+  color: #fff; 
+  font-size: 20px; 
+}
+
+.menu-logo span {
+  color: #d4af37; 
+}
+
+.close-menu-btn { 
+  background: transparent; 
+  border: none; 
+  cursor: pointer; 
+  color: #fff;
+  padding: 0;
+}
+
+.close-menu-btn svg { 
+  width: 28px; 
+  height: 28px; 
+  transition: transform 0.3s, color 0.3s;
+}
+
+.close-menu-btn:hover svg { 
+  transform: rotate(90deg); 
+  color: #d4af37; 
+}
+
+.menu-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px 30px;
+}
+
+/* 3 Box Superiori (Quick Actions) */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px;
+  padding: 20px;
+}
+.action-box {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+.action-box:hover { border-color: #000; }
+.action-box svg { width: 20px; height: 20px; color: #000; }
+.action-box span { font-size: 11px; font-weight: 500; color: #000; }
+
+/* Lista Navigazione Principale */
+.drawer-nav-list {
+  list-style: none; padding: 0; margin: 0;
+}
+.drawer-nav-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eaeaea;
+  transition: background 0.2s ease;
+}
+.drawer-nav-list li a {
+  display: block;
+  width: 100%;
+  padding: 20px 0;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.drawer-nav-list li svg { width: 16px; height: 16px; color: #000; }
+
+.drawer-nav-list li:hover { padding-left: 10px; } 
+
+/* Stile rosso per "SALE" */
+.drawer-nav-list li.highlight-red a {
+  color: #d32f2f;
+}
+
+/* Responsività per schermi molto piccoli */
+@media (max-width: 500px) {
+  .side-menu-drawer { width: 100vw; }
+  .desktop-only { display: none; } 
+}
+
+.section-title {
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 2px;
+  padding: 20px 0 10px 0;
+  border-bottom: none !important;
+}
+
+.highlight-gold a {
+  color: #d4af37 !important; 
+  font-weight: 700;
+}
+
+.highlight-red a {
+  color: #d90000 !important; 
+  font-weight: 700;
+}
+
+.drawer-nav-list li svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0.5;
+}

@@ -1,0 +1,118 @@
+<div class="luxury-wrapper" *ngIf="prodotto">
+  <div class="main-content-split">
+    
+    <div class="visual-gallery">
+        <div class="hero-image-container" style="position: relative;" [ngClass]="{'prodotto-finito': prodotto.quantita <= 0}">
+            
+            <div class="badge-esaurito" *ngIf="prodotto.quantita <= 0" style="font-size: 16px; padding: 10px 20px;">ESAURITO</div>
+            
+            <img [src]="immagineSelezionata || 'assets/no-foto.png'" alt="Dettaglio">
+        </div>
+        
+        <div class="thumbnails-track" *ngIf="prodotto && prodotto.immagini && prodotto.immagini.length > 1">
+            <div class="thumb-item" *ngFor="let img of prodotto.immagini" (click)="cambiaImmagine(img)">
+                <img [src]="img" alt="Miniatura">
+            </div>
+        </div>
+    </div>
+
+    <div class="product-info-vault">
+      <div class="header-meta">
+        <h1 class="brand-title">{{ prodotto.marca | uppercase }}</h1>
+        <p class="full-model-name">{{ prodotto.nome }}</p>
+        <p class="internal-ref">Ref LuxuryTime: {{ prodotto.id }}</p>
+      </div>
+
+      <div class="price-display">
+        <ng-container *ngIf="prodotto.prezzoScontato && prodotto.prezzoScontato > 0; else prezzoNormale">
+          <span style="text-decoration: line-through; color: #999; font-size: 0.7em; margin-right: 15px;">
+            {{ prodotto.prezzo | number:'1.0-0':'it-IT' }} €
+          </span>
+          <span style="color: #d90000;">
+            {{ prodotto.prezzoScontato | number:'1.0-0':'it-IT' }} €
+          </span>
+        </ng-container>
+
+        <ng-template #prezzoNormale>
+          <span>{{ prodotto.prezzo | number:'1.0-0':'it-IT' }} €</span>
+        </ng-template>
+      </div>
+
+      <div class="cta-group">
+        <button class="btn-black-luxury full-width" 
+                (click)="aggiungiAlCarrello()"
+                [disabled]="prodotto.quantita <= 0"
+                [ngClass]="{'esaurito': prodotto.quantita <= 0}">
+          {{ prodotto.quantita > 0 ? 'AGGIUNGI AL CARRELLO' : 'NON DISPONIBILE' }}
+        </button>
+        
+        <div class="secondary-actions">
+  
+          <button class="btn-outline-luxury flex-1" routerLink="/supporto" style="cursor: pointer;">
+              PRENDI UN APPUNTAMENTO
+          </button>
+
+          <button class="btn-wishlist-black" (click)="toggleFavorite()">
+            
+            <svg *ngIf="!wishlistService.isInWishlist(prodotto.id!)" 
+                class="heart-icon outline-white" 
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+
+            <svg *ngIf="wishlistService.isInWishlist(prodotto.id!)" 
+                class="heart-icon filled-white" 
+                viewBox="0 0 24 24" fill="#fff" stroke="#fff" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+            </svg>
+
+            <div class="wishlist-text">
+               <span class="action-word" *ngIf="!wishlistService.isInWishlist(prodotto.id!)">Add To</span>
+               <span class="action-word" *ngIf="wishlistService.isInWishlist(prodotto.id!)">Remove</span>
+               <span class="target-word">Watchlist</span>
+            </div>
+
+          </button>
+        </div>
+      </div>
+
+      <section class="technical-specs" *ngIf="prodotto"> <h2 class="section-divider-title">Descrizione</h2>
+        <div class="specs-matrix">
+            <div class="matrix-column">
+            <div class="entry" *ngIf="prodotto.marca"><span class="key">Marca :</span> <span class="val">{{ prodotto.marca }}</span></div>
+            <div class="entry" *ngIf="prodotto.modello"><span class="key">Modello :</span> <span class="val">{{ prodotto.modello }}</span></div>
+            <div class="entry" *ngIf="prodotto.anno"><span class="key">Anno :</span> <span class="val">{{ prodotto.anno }}</span></div>
+            <div class="entry limited-edition" *ngIf="prodotto.edizioneLimitata">
+                <span class="key">Edizione Limitata :</span> <span class="val">Si</span>
+            </div>
+            <div class="entry" *ngIf="prodotto.genere"><span class="key">Genere :</span> <span class="val">{{ prodotto.genere }}</span></div>
+            <div class="entry" *ngIf="prodotto.movimento"><span class="key">Movimento :</span> <span class="val">{{ prodotto.movimento.split('_').join(' ') }}</span></div>
+            <div class="entry" *ngIf="prodotto.materialeCassa">
+              <span class="key">Materiale Cassa :</span> 
+              <span class="val">{{ prodotto.materialeCassa.split('_').join(' ') }}</span>
+            </div>
+            <div class="entry" *ngIf="prodotto.materialeCinturino">
+              <span class="key">Materiale Cinturino :</span> 
+              <span class="val">{{ prodotto.materialeCinturino.split('_').join(' ') }}</span>
+            </div>
+            <div class="entry" *ngIf="prodotto.diametroCassa">
+              <span class="key">Diametro Cassa :</span> <span class="val">{{ prodotto.diametroCassa }}</span>
+            </div>
+          </div>
+
+            <div class="matrix-column">
+              <div class="entry" *ngIf="prodotto.coloreQuadrante"><span class="key">Colore Quadrante :</span> <span class="val">{{ prodotto.coloreQuadrante }}</span></div>
+              <div class="entry" *ngIf="prodotto.tipoVetro"><span class="key">Tipo Vetro :</span> <span class="val">{{ prodotto.tipoVetro }}</span></div>
+              <div class="entry" *ngIf="prodotto.resistenzaAcqua"><span class="key">Resistenza Acqua :</span> <span class="val">{{ prodotto.resistenzaAcqua }}</span></div>
+              <div class="entry" *ngIf="prodotto.circonferenzaPolso"><span class="key">Circonferenza Polso :</span> <span class="val">{{ prodotto.circonferenzaPolso }}</span></div>
+              <div class="entry" *ngIf="prodotto.riferimento"><span class="key">Riferimento :</span> <span class="val">{{ prodotto.riferimento }}</span></div>
+              <div class="entry" *ngIf="prodotto.collezione"><span class="key">Collezione :</span> <span class="val">{{ prodotto.collezione }}</span></div>
+              <div class="entry" *ngIf="prodotto.condizione"><span class="key">Condizione :</span> <span class="val">{{ prodotto.condizione.split('_').join(' ') }}</span></div> <div class="entry" *ngIf="prodotto.garanzia"><span class="key">Garanzia :</span> <span class="val">{{ prodotto.garanzia }}</span></div>
+              <div class="entry" *ngIf="prodotto.certificato"><span class="key">Certificato :</span> <span class="val">{{ prodotto.certificato }}</span></div>
+              <div class="entry" *ngIf="prodotto.chiusura"><span class="key">Chiusura :</span> <span class="val">{{ prodotto.chiusura }}</span></div>
+            </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,793 @@
+/* Stili Generali della Homepage */
+.homepage-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Stile pulito ed elegante */
+}
+
+/* HERO SECTION */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden; /* Non fa uscire il video fuori dai bordi */
+  background-color: #000; 
+}
+
+/* Stile per il video per occupare tutto lo spazio */
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mostra tutto il video */
+  background-color: #000;
+  transform: translate(-50%, -50%); /* Centra il video */
+  z-index: 0; 
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Velo al 40% per far leggere il testo */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  transform: translateY(100px);
+}
+
+/* Titolo principale della Hero */
+.hero-title {
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  font-size: 2.5 rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 0.8rem;
+  font-weight: 300;
+  max-width: 600px; /* Stringiamo la larghezza così il testo va su più righe e non si allarga troppo */
+  margin: 0 auto 40px auto; /* Centra il blocco di testo */
+  line-height: 1.6;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* BOTTONI CALL TO ACTION */
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Bottone Principale (Pieno) */
+.btn-primary-luxury {
+  background-color: #d4af37; 
+  color: #000000;
+  padding: 15px 40px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid #d4af37;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary-luxury:hover {
+  background-color: #b5952f;
+  border-color: #b5952f;
+}
+
+/* Bottone Secondario */
+.btn-secondary-luxury {
+  background-color: transparent;
+  color: #fff;
+  padding: 15px 40px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid #fff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary-luxury:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .btn-primary-luxury, .btn-secondary-luxury {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+/* TITOLI DI SEZIONE COMUNI */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.section-divider {
+  width: 50px;
+  height: 2px;
+  background-color: #d4af37;
+  margin: 0 auto 20px auto;
+}
+
+/* SEZIONE BRANDS */
+.brands-section {
+  padding: 40px 0; 
+  background-color: #ffffff;
+  text-align: center;
+  width: 100vw; /* Tutta la larghezza dello schermo */
+  margin-left: calc(-50vw + 50%); /* Forza l'uscita dai margini del contenitore */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.brand-section-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2.8rem;
+  color: #000000; 
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.brand-section-subtitle {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.brands-section .carousel-wrapper {
+  max-width: 100%;
+  padding: 0;
+}
+
+/* Carosello a scorrimento orizzontale */
+.brands-carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.brands-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Contenitore della singola colonna Brand */
+.brand-card-wrapper {
+  flex: 0 0 clamp(250px, 22vw, 320px); 
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;  
+}
+
+/* La Card con l'immagine di sfondo */
+.brand-card {
+  position: relative;
+  display: block;
+  height: clamp(340px, 30vw, 420px); 
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.brand-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  z-index: 1;
+}
+
+.brand-logo-text {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  z-index: 2;
+  margin: 0;
+}
+
+/* Link in basso con freccina */
+.shop-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d2a2a; 
+  text-decoration: none;
+  margin-top: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.shop-brand-link:hover {
+  color: #d4af37; /* Diventa oro al passaggio del mouse */
+}
+
+.shop-brand-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.brands-section .nav-arrow {
+  background: rgba(0, 0, 0, 0.6);
+  color: #d4af37;
+  border: 1px solid #d4af37;
+}
+
+.brands-section .nav-arrow:hover {
+  background: #d4af37;
+  color: #000;
+}
+
+.brands-section .left-arrow { left: 20px; }
+.brands-section .right-arrow { right: 20px; }
+
+/* Adattamento Mobile */
+@media (max-width: 768px) {
+  .brand-section-title {
+    font-size: 2.2rem;
+  }
+  .brand-card-wrapper {
+    flex: 0 0 280px;
+  }
+  .brand-card {
+    height: 380px;
+  }
+}
+
+/* SEZIONE OROLOGI IN EVIDENZA */
+.featured-watches {
+  padding: 40px 20px 80px 20px;
+  background-color: #f7f8f9;
+}
+
+/* Flexbox controllato */
+.watches-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra sempre le card */
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto 50px auto;
+}
+
+/* Stile della singola Card - fissa a 300px */
+.card {
+  position: relative;
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.watches-carousel .card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.clickable-area {
+  text-decoration: none;
+  color: inherit;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.immagine-box {
+  width: 100%;
+  height: 240px; 
+  background: #fdfdfd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.immagine-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .immagine-box img {
+  transform: scale(1.05);
+}
+
+.info-prodotto {
+  text-align: left;
+  padding: 0 20px;
+  flex-grow: 1;
+}
+
+.marca {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.modello {
+  font-size: 15px;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  height: 42px;
+  overflow: hidden;
+}
+
+/* Stili Prezzi */
+.prezzo-container {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prezzo {
+  font-size: 19px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.prezzo-rosso {
+  font-size: 19px;
+  color: #d90000;
+  font-weight: 700;
+}
+
+.prezzo-barrato {
+  font-size: 13px;
+  color: #999;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.badge-sconto {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #d90000;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  z-index: 5;
+  border-radius: 2px;
+}
+
+/* Footer Card */
+.card-footer-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid #eaeaea;
+  background: #fff;
+  margin-top: auto;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.icon-green-check { width: 14px; height: 14px; stroke: #28a745; }
+.icon-calendar { width: 14px; height: 14px; stroke: #888; }
+
+
+/* Tasto Wishlist sta sopra all'immagine della card */
+.wishlist-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 15;
+}
+
+/* BOTTONE VIEW ALL */
+.view-all-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.btn-black-view-all {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #000;
+  color: #fff;
+  padding: 15px 40px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-black-view-all svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-black-view-all:hover {
+  background-color: #333;
+}
+
+.loading-spinner {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+  padding: 50px 0;
+}
+
+/* STILI DELLE FRECCE E DEI CAROSELLI */
+
+/* Il contenitore che tiene le frecce ai lati */
+.carousel-wrapper {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px; /* Spazio per le frecce laterali */
+}
+
+/* Stile base delle frecce */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  background-color: #fff;
+  border: 1px solid #110a0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.nav-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+/* Orologi in Carosello orizzontale */
+.watches-carousel {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 30px; 
+  /* Nasconde la barra di scorrimento nativa ma permette lo scroll */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.watches-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Forziamo le card degli orologi a non restringersi */
+.watches-carousel .watch-card {
+  flex: 0 0 300px; /* Ogni orologio sarà largo 300px fissi */
+  scroll-snap-align: start;
+}
+
+/* Adattamento Mobile */
+@media (max-width: 768px) {
+  .nav-arrow {
+    display: none;
+  }
+  .carousel-wrapper {
+    padding: 0 10px; 
+  }
+}
+
+/* STILI CUORI */
+.wishlist-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.heart-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Stile per il cuore vuoto */
+.heart-icon.outline {
+  color: #333;
+}
+
+/* Stile per il cuore pieno */
+.heart-icon.filled {
+  fill: #b02a37;
+  filter: drop-shadow(0 2px 4px rgba(176, 42, 55, 0.3));
+}
+
+/* ADATTAMENTO MOBILE GENERALE */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(1.8rem, 8vw, 2.8rem); /* Il testo si restringe fluidamente */
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+    padding: 0 15px; /* Evita che il testo tocchi i bordi dello schermo */
+  }
+
+  .brand-section-title {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+  }
+
+  .nav-arrow {
+    display: none !important;
+  }
+  
+  .brands-carousel, .watches-carousel {
+    padding-left: 15px; 
+  }
+}
+
+/* BANNER SCORREVOLE LOGHI BRAND */
+.luxury-ticker {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  background-color: #161616;
+  padding: 30px 0;
+  display: flex;
+}
+
+.ticker-content {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  /* Scorrimento continuo */
+  animation: scrollTicker 35s linear infinite; 
+}
+
+/* IL BOX BIANCO ATTORNO AL LOGO */
+.brand-box {
+  background-color: #ffffff;
+  width: 220px; /* Larghezza del box */
+  height: 110px; /* Altezza del box */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-right: 15px; /* Spazio tra un box e l'altro */
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* Ombra leggerissima */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Leggero sollevamento al passaggio del mouse */
+.brand-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.brand-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Loop Infinito */
+@keyframes scrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* STILI SCONTI CAROSELLO HOME */
+.badge-sconto {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #d90000;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  z-index: 2;
+  border-radius: 2px;
+}
+
+.watch-price-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.watch-price-strikethrough {
+  font-size: 0.95rem;
+  color: #999;
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.watch-price-sale {
+  font-size: 1.2rem;
+  color: #d90000;
+  font-weight: 700;
+}
+
+/* MODELLI ESAURITI */
+.badge-esaurito {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #111111; 
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  z-index: 2;
+  border-radius: 2px;
+}
+
+.prodotto-finito .immagine-box img,
+.prodotto-finito.hero-image-container img {
+  opacity: 0.35;
+  filter: grayscale(100%);
+}
+
+.prodotto-finito:hover .immagine-box img {
+  transform: none; 
+}
+
+button.esaurito {
+  background-color: #f0f0f0 !important;
+  color: #999999 !important;
+  cursor: not-allowed;
+  border-color: #eaeaea !important;
+}
+
+/* LOGO IMMAGINE SOVRAPPOSTO IN BASSO NELLA CARD */
+.brand-logo-img {
+  position: absolute;
+  bottom: 25px; 
+  left: 50%;
+  transform: translateX(-50%); /* Lo centra solo orizzontalmente */
+  width: 60%;
+  max-width: 220px; 
+  z-index: 2; 
+  
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.6));
+  
+  transition: transform 0.3s ease;
+}
+
+/* Effetto dinamico quando passi col mouse */
+.brand-card:hover .brand-logo-img {
+  transform: translateX(-50%) scale(0.95);
+}

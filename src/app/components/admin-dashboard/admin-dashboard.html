@@ -1,0 +1,293 @@
+<div class="admin-wrapper">
+  
+  <div class="admin-header">
+    <h1>PANNELLO DI CONTROLLO</h1>
+    <div class="admin-tabs">
+      <button class="tab-btn" [class.active]="tabAttivo === 'prodotti'" (click)="cambiaTab('prodotti')">Gestione Prodotti</button>
+      <button class="tab-btn" [class.active]="tabAttivo === 'utenti'" (click)="cambiaTab('utenti')">Gestione Utenti</button>
+      <button class="tab-btn" [class.active]="tabAttivo === 'ordini'" (click)="cambiaTab('ordini')">Storico Ordini</button>
+    </div>
+  </div>
+
+  <div *ngIf="tabAttivo === 'prodotti'">
+    <div class="action-bar-top">
+      <h2>Catalogo Orologi</h2>
+      
+      <div class="admin-search-box" *ngIf="!mostraForm">
+        <input type="text" [(ngModel)]="termineRicercaProdotti" placeholder="Cerca ID, Marca o Modello...">
+      </div>
+
+      <button class="btn-nuovo" *ngIf="!mostraForm" (click)="resetForm(); mostraForm = true">+ Aggiungi Nuovo Orologio</button>
+    </div>
+
+    <div class="alert success" *ngIf="messaggioProdotto">{{ messaggioProdotto }}</div>
+    <div class="alert error" *ngIf="erroreProdotto">{{ erroreProdotto }}</div>
+
+    <div class="table-container" *ngIf="!mostraForm">
+      <div *ngIf="caricamentoProdotti" class="loader">Caricamento inventario...</div>
+
+      <table class="admin-table" *ngIf="!caricamentoProdotti">
+        <thead>
+          <tr>
+            <th>ID</th> <th>Foto</th>
+            <th>Marca</th>
+            <th>Modello</th>
+            <th>Prezzo</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of prodottiFiltratiAdmin">
+            <td><strong>#{{ p.id }}</strong></td> <td class="td-img">
+              <img [src]="(p.immagini && p.immagini.length > 0) ? p.immagini[0] : 'assets/no-foto.png'" alt="foto">
+            </td>
+            <td><strong>{{ p.marca }}</strong></td>
+            <td>{{ p.nome }}</td>
+            <td>{{ p.prezzo }} €</td>
+            <td class="td-azioni">
+              <button class="btn-icon" (click)="toggleVisibilita(p)" [title]="p.attivo !== false ? 'Nascondi dal Negozio' : 'Mostra nel Negozio'">
+                <span class="material-icons" [style.color]="p.attivo !== false ? '#28a745' : '#888'">
+                  {{ p.attivo !== false ? 'visibility' : 'visibility_off' }}
+                </span>
+              </button>
+              <button class="btn-icon edit" (click)="selezionaPerModifica(p)"><span class="material-icons">edit</span></button>
+              <button class="btn-icon delete" (click)="eliminaProdotto(p.id!, p.nome)"><span class="material-icons">delete</span></button>
+            </td>
+          </tr>
+          <tr *ngIf="prodottiFiltratiAdmin && prodottiFiltratiAdmin.length === 0">
+            <td colspan="6" style="text-align: center; padding: 20px; color: #888;">Nessun prodotto trovato.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="admin-panel" *ngIf="mostraForm">
+      <div class="form-header">
+        <h2>{{ isModifica ? 'Modifica Orologio' : 'Aggiungi Nuovo Orologio' }}</h2>
+        <button class="btn-chiudi" (click)="resetForm()">Annulla</button>
+      </div>
+      
+      <form #formOrologio="ngForm" (ngSubmit)="salvaProdotto()"> 
+        <h3 class="sezione-form">Informazioni Base</h3>
+        <div class="form-grid">
+          <div class="form-group"><label>Marca *</label><input type="text" [(ngModel)]="nuovoProdotto.marca" name="marca" required></div>
+          <div class="form-group"><label>Modello *</label><input type="text" [(ngModel)]="nuovoProdotto.modello" name="modello" required></div>
+          <div class="form-group full-width"><label>Nome (Titolo) *</label><input type="text" [(ngModel)]="nuovoProdotto.nome" name="nome" required></div>
+          <div class="form-group"><label>Prezzo Originale (€) *</label><input type="number" [(ngModel)]="nuovoProdotto.prezzo" name="prezzo" required></div>
+          <div class="form-group"><label style="color: #d90000;">Prezzo Scontato (€)</label><input type="number" [(ngModel)]="nuovoProdotto.prezzoScontato" name="prezzoScontato"></div>
+          <div class="form-group"><label>Quantità *</label><input type="number" [(ngModel)]="nuovoProdotto.quantita" name="quantita" required></div>
+          <div class="form-group"><label>Anno *</label><input type="number" [(ngModel)]="nuovoProdotto.anno" name="anno" required></div>
+        </div>
+
+        <h3 class="sezione-form">Dettagli Tecnici</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Genere *</label>
+            <select [(ngModel)]="nuovoProdotto.genere" name="genere" required>
+              <option [ngValue]="null">Seleziona...</option>
+              <option value="Uomo">Uomo</option>
+              <option value="Donna">Donna</option>
+              <option value="Unisex">Unisex</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Movimento / Calibro *</label>
+            <select [(ngModel)]="nuovoProdotto.movimento" name="movimento" required>
+              <option [ngValue]="null">Seleziona...</option>
+              <option value="Automatico">Automatico</option>
+              <option value="Manuale">Manuale</option>
+              <option value="Carica_manuale">Carica manuale</option>
+              <option value="Quarzo">Quarzo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Materiale Cassa *</label>
+            <select [(ngModel)]="nuovoProdotto.materialeCassa" name="materialeCassa" required>
+              <option [ngValue]="null">Seleziona...</option>
+              <option value="Acciaio_inossidabile">Acciaio inossidabile</option>
+              <option value="Acciaio_e_Oro_giallo">Acciaio e Oro giallo</option>
+              <option value="Oro_giallo">Oro giallo</option>
+              <option value="Oro_rosa">Oro rosa</option>
+              <option value="Acciaio_e_Oro_rosa">Acciaio e Oro rosa</option>
+              <option value="Oro_bianco">Oro bianco</option>
+              <option value="Titanio">Titanio</option>
+              <option value="Acciaio_e_Oro_bianco">Acciaio e Oro bianco</option>
+              <option value="Ceramica">Ceramica</option>
+              <option value="Argento">Argento</option>
+              <option value="Platino">Platino</option>
+              <option value="Acciaio_e_Platino">Acciaio e Platino</option>
+              <option value="Bronzo">Bronzo</option>
+              <option value="Ceramica_nera">Ceramica nera</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Materiale Cinturino *</label>
+            <select [(ngModel)]="nuovoProdotto.materialeCinturino" name="materialeCinturino" required>
+              <option [ngValue]="null">Seleziona...</option>
+              <option value="Acciaio_inossidabile">Acciaio inossidabile</option>
+              <option value="Acciaio_e_Oro_giallo">Acciaio e Oro giallo</option>
+              <option value="Oro_giallo">Oro giallo</option>
+              <option value="Acciaio_e_Oro_rosa">Acciaio e Oro rosa</option>
+              <option value="Oro_rosa">Oro rosa</option>
+              <option value="Oro_bianco">Oro bianco</option>
+              <option value="Titanio">Titanio</option>
+              <option value="Platino">Platino</option>
+              <option value="Bronzo">Bronzo</option>
+              <option value="Acciaio_e_Oro_bianco">Acciaio e Oro bianco</option>
+              <option value="Pelle">Pelle</option>
+              <option value="Gomma">Gomma</option>
+              <option value="Alligatore">Alligatore</option>
+              <option value="Tessuto">Tessuto</option>
+              <option value="Coccodrilli">Coccodrilli</option>
+              <option value="Ceramica">Ceramica</option>
+              <option value="Kevlar">Kevlar</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Edizione Limitata</label>
+            <select [(ngModel)]="nuovoProdotto.edizioneLimitata" name="edizioneLimitata">
+              <option [ngValue]="false">No</option>
+              <option [ngValue]="true">Sì</option>
+            </select>
+          </div>
+
+          <div class="form-group"><label>Colore Quadrante</label><input type="text" [(ngModel)]="nuovoProdotto.coloreQuadrante" name="coloreQuadrante"></div>
+          <div class="form-group"><label>Diametro Cassa</label><input type="text" [(ngModel)]="nuovoProdotto.diametroCassa" name="diametroCassa"></div>
+          <div class="form-group"><label>Tipo Vetro</label><input type="text" [(ngModel)]="nuovoProdotto.tipoVetro" name="tipoVetro"></div>
+          <div class="form-group"><label>Resistenza Acqua</label><input type="text" [(ngModel)]="nuovoProdotto.resistenzaAcqua" name="resistenzaAcqua"></div>
+          <div class="form-group"><label>Circonferenza Polso</label><input type="text" [(ngModel)]="nuovoProdotto.circonferenzaPolso" name="circonferenzaPolso"></div>
+          <div class="form-group"><label>Condizione</label><input type="text" [(ngModel)]="nuovoProdotto.condizione" name="condizione"></div>
+          <div class="form-group"><label>Garanzia</label><input type="text" [(ngModel)]="nuovoProdotto.garanzia" name="garanzia"></div>
+          <div class="form-group"><label>Collezione</label><input type="text" [(ngModel)]="nuovoProdotto.collezione" name="collezione"></div>
+          <div class="form-group"><label>Riferimento (Ref)</label><input type="text" [(ngModel)]="nuovoProdotto.riferimento" name="riferimento"></div>
+          <div class="form-group"><label>Certificato</label><input type="text" [(ngModel)]="nuovoProdotto.certificato" name="certificato"></div>
+          <div class="form-group"><label>Chiusura</label><input type="text" [(ngModel)]="nuovoProdotto.chiusura" name="chiusura"></div>
+        </div>
+
+        <h3 class="sezione-form">Gestione Immagini (URL)</h3>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <div class="image-input-group" *ngFor="let img of nuovoProdotto.immagini; let i = index; trackBy: trackByIndex" style="display:flex; margin-bottom:10px;">
+              <input type="text" [(ngModel)]="nuovoProdotto.immagini[i]" [name]="'img_' + i" placeholder="Incolla l'URL dell'immagine qui..." style="flex-grow:1;">
+              <button type="button" class="btn-rimuovi-img" (click)="rimuoviImmagine(i)" style="margin-left:10px;"><span class="material-icons">delete</span></button>
+            </div>
+            <button type="button" class="btn-aggiungi-img" (click)="aggiungiImmagine()">+ AGGIUNGI URL FOTO</button>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn-salva" [disabled]="!formOrologio.valid">{{ isModifica ? 'SALVA MODIFICHE' : 'SALVA NUOVO OROLOGIO' }}</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="tabAttivo === 'utenti'">
+    <div class="action-bar-top">
+      <h2>Clienti Registrati</h2>
+
+      <div class="admin-search-box" *ngIf="!mostraFormUtente">
+        <input type="text" [(ngModel)]="termineRicercaUtenti" placeholder="Cerca ID, Nome o Email...">
+      </div>
+
+    </div>
+    <div class="alert success" *ngIf="messaggioUtente">{{ messaggioUtente }}</div>
+    <div class="alert error" *ngIf="erroreUtente">{{ erroreUtente }}</div>
+
+    <div class="table-container" *ngIf="!mostraFormUtente">
+      <div *ngIf="caricamentoUtenti" class="loader">Caricamento utenti...</div>
+      <table class="admin-table" *ngIf="!caricamentoUtenti">
+        <thead>
+          <tr><th>ID</th><th>Nome e Cognome</th><th>Email</th><th>Telefono</th><th>Azioni</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of utentiFiltratiAdmin">
+            <td>#{{ u.id }}</td>
+            <td><strong>{{ u.nome }} {{ u.cognome }}</strong></td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.numeroTelefonico || 'N/A' }}</td>
+            <td class="td-azioni">
+              <button class="btn-icon edit" (click)="selezionaUtentePerModifica(u)"><span class="material-icons">edit</span></button>
+              <button class="btn-icon delete" (click)="eliminaUtente(u)"><span class="material-icons">delete</span></button>
+            </td>
+          </tr>
+          <tr *ngIf="utentiFiltratiAdmin && utentiFiltratiAdmin.length === 0">
+            <td colspan="5" style="text-align: center; padding: 20px; color: #888;">Nessun utente trovato.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="admin-panel" *ngIf="mostraFormUtente">
+      <div class="form-header">
+        <h2>Modifica Dati Cliente (#{{ utenteInModifica.id }})</h2>
+        <button class="btn-chiudi" (click)="annullaModificaUtente()">Annulla</button>
+      </div>
+      <form #formUtente="ngForm" (ngSubmit)="salvaUtente()"> 
+        <div class="form-grid">
+          <div class="form-group"><label>Nome *</label><input type="text" [(ngModel)]="utenteInModifica.nome" name="nome" required></div>
+          <div class="form-group"><label>Cognome *</label><input type="text" [(ngModel)]="utenteInModifica.cognome" name="cognome" required></div>
+          <div class="form-group full-width"><label>Email *</label><input type="email" [(ngModel)]="utenteInModifica.email" name="email" required></div>
+          <div class="form-group full-width"><label>Telefono</label><input type="text" [(ngModel)]="utenteInModifica.numeroTelefonico" name="telefono"></div>
+        </div>
+        <button type="submit" class="btn-salva" [disabled]="!formUtente.valid">Salva Dati Cliente</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="tabAttivo === 'ordini'">
+    <div class="action-bar-top">
+      <h2>Gestione Ordini</h2>
+
+      <div class="admin-search-box">
+        <input type="text" [(ngModel)]="termineRicercaOrdini" placeholder="Cerca ID Ordine o Cliente...">
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div *ngIf="caricamentoOrdini" class="loader">Caricamento ordini in corso...</div>
+      <table class="admin-table" *ngIf="!caricamentoOrdini">
+        <thead>
+          <tr><th>ID</th><th>Data</th><th>Cliente</th><th>Indirizzo</th><th>Totale</th><th>Stato</th><th>Azioni</th></tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let ordine of ordiniFiltratiAdmin">
+            <tr>
+              <td><strong>#{{ ordine.id }}</strong></td>
+              <td>{{ ordine.data | date:'dd/MM/yyyy' }}</td>
+              <td>{{ ordine.clienteNome }}</td>
+              <td>{{ ordine.via }}</td>
+              <td>{{ ordine.totale }} €</td>
+              <td>
+                <select [ngModel]="ordine.stato" (ngModelChange)="cambiaStato(ordine.id, $event)">
+                  <option value="In Lavorazione">In Lavorazione</option>
+                  <option value="Spedito">Spedito</option>
+                  <option value="Consegnato">Consegnato</option>
+                  <option value="Annullato">Annullato</option>
+                </select>
+              </td>
+              <td class="td-azioni">
+                <button class="btn-black-small" (click)="apriDettaglioOrdine(ordine)">Dettagli</button>
+                <button class="btn-danger-small" (click)="eliminaOrdineAdmin(ordine.id)">Elimina</button>
+              </td>
+            </tr>
+            <tr *ngIf="ordineSelezionato?.id === ordine.id" class="details-row">
+              <td colspan="7">
+                <div class="order-details-box">
+                  <h4>Prodotti Acquistati:</h4>
+                  <div class="product-item" *ngFor="let p of ordine.prodotti">
+                    <img [src]="p.immagine" alt="Orologio" width="50" style="vertical-align: middle; margin-right: 10px;">
+                    <span><strong>[ID: #{{ p.id }}]</strong> <strong>{{ p.marca }}</strong> {{ p.modello }} - Qtà: {{ p.quantita }} - {{ p.prezzo }} €</span>
+                  </div>
+                  <button class="btn-close" (click)="ordineSelezionato = null">Chiudi Dettagli</button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+          <tr *ngIf="ordiniFiltratiAdmin && ordiniFiltratiAdmin.length === 0">
+            <td colspan="7" style="text-align: center; padding: 20px; color: #888;">Nessun ordine trovato.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

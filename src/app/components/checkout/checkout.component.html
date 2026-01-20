@@ -1,0 +1,121 @@
+<div class="checkout-wrapper">
+
+  <div class="loader-container" *ngIf="caricamento">
+    <div class="luxury-spinner"></div>
+    <p>Elaborazione in corso...</p>
+  </div>
+
+  <div class="success-container" *ngIf="ordineCompletato">
+    <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <h2>Ordine Confermato</h2>
+    <p>Grazie per il tuo acquisto su LuxuryTime. Riceverai a breve un'email con i dettagli della spedizione assicurata.</p>
+    <button class="btn-black" routerLink="/prodotti">TORNA ALLA COLLEZIONE</button>
+  </div>
+
+  <div class="checkout-layout" *ngIf="!caricamento && !ordineCompletato">
+    
+    <div class="checkout-form-column">
+      <form #checkoutForm="ngForm" (ngSubmit)="confermaOrdine()">
+        
+        <div class="form-section">
+          <h3 class="section-title">1. Dati di Spedizione</h3>
+          <div class="form-grid">
+            <div class="input-group half-width">
+              <label>Nome</label>
+              <input type="text" name="nome" [(ngModel)]="spedizione.nome" required>
+            </div>
+            <div class="input-group half-width">
+              <label>Cognome</label>
+              <input type="text" name="cognome" [(ngModel)]="spedizione.cognome" required>
+            </div>
+            <div class="input-group full-width">
+              <label>Indirizzo di Consegna</label>
+              <input type="text" name="indirizzo" [(ngModel)]="spedizione.indirizzo" required placeholder="Es. Via Roma 123">
+            </div>
+            
+            <div class="input-group full-width">
+              <label>Numero di Telefono (Richiesto dal corriere) *</label>
+              <input type="text" name="telefono" [(ngModel)]="spedizione.telefono" required placeholder="+39 333 1234567">
+            </div>
+            <div class="input-group half-width">
+              <label>Città</label>
+              <input type="text" name="citta" [(ngModel)]="spedizione.citta" required>
+            </div>
+            <div class="input-group half-width">
+              <label>CAP</label>
+              <input type="text" name="cap" [(ngModel)]="spedizione.cap" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">2. Metodo di Pagamento</h3>
+          <div class="form-grid">
+            <div class="input-group full-width">
+              <label>Titolare della Carta</label>
+              <input type="text" name="titolare" [(ngModel)]="pagamento.titolare" required>
+            </div>
+            <div class="input-group full-width">
+              <label>Numero della Carta</label>
+              <input type="text" name="numeroCarta" [(ngModel)]="pagamento.numeroCarta" required placeholder="0000 0000 0000 0000" maxlength="19">
+            </div>
+            <div class="input-group half-width">
+              <label>Scadenza (MM/AA)</label>
+              <input type="text" name="scadenza" [(ngModel)]="pagamento.scadenza" required placeholder="MM/AA" maxlength="5">
+            </div>
+            <div class="input-group half-width">
+              <label>CVV</label>
+              <input type="password" name="cvv" [(ngModel)]="pagamento.cvv" required placeholder="123" maxlength="3">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-black full-width submit-btn" [disabled]="checkoutForm.invalid">
+          PAGA {{ totale | number:'1.0-0':'it-IT' }} € E CONCLUDI L'ORDINE
+        </button>
+        <p class="security-notice">Facendo clic sul pulsante accetti i Termini e le Condizioni di vendita. L'addebito verrà effettuato in modo sicuro.</p>
+      </form>
+    </div>
+
+    <div class="checkout-summary-column">
+      <div class="summary-box">
+        <h3 class="summary-title">Riepilogo Ordine</h3>
+        
+        <div class="summary-items">
+          <div class="item-row" *ngFor="let item of articoli">
+            <div class="item-image">
+              <img [src]="item.prodotto.immagini[0] || 'assets/no-foto.png'" alt="Orologio">
+              <span class="item-quantity">{{ item.quantita }}</span>
+            </div>
+            <div class="item-details">
+              <h4>{{ item.prodotto.marca }}</h4>
+              <p>{{ item.prodotto.nome }}</p>
+            </div>
+            <div class="item-price">
+              {{ (item.prezzo * item.quantita) | number:'1.0-0':'it-IT' }} €
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-totals">
+          <div class="total-row">
+            <span>Subtotale</span>
+            <span>{{ totale | number:'1.0-0':'it-IT' }} €</span>
+          </div>
+          <div class="total-row">
+            <span>Spedizione Assicurata</span>
+            <span>Gratuita</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Totale da Pagare</span>
+            <span>{{ totale | number:'1.0-0':'it-IT' }} €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
