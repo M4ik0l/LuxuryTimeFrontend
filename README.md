@@ -15,8 +15,8 @@ Single Page Application (SPA) sviluppata con **Angular 21.1.4** per **LuxuryTime
 ## Architettura e Funzionalità Principali
 
 * **🛍️ Catalogo Interattivo & Ricerca Avanzata:**
-    * Esplorazione del catalogo con filtri dinamici per brand, fascia di prezzo, categoria e disponibilità in tempo reale.
-    * Pagina di dettaglio prodotto con galleria immagini e indicatori dinamici di scorte limitate.
+    * Esplorazione del catalogo con filtri dinamici per brand, fascia di prezzo, in offerta e categoria.
+    * Visualizzazione chiara delle referenze con indicazione dello stato di disponibilità in magazzino.
 
 * **Carrello Reattivo con Prenotazione Stock:**
     * Gestione reattiva dello stato del carrello tramite **RxJS ("BehaviorSubject")** sincronizzato con il backend.
