@@ -1,4 +1,4 @@
-# ⌚ LuxuryTime — Luxury Watches E-Commerce (Frontend)
+# LuxuryTime — Luxury Watches E-Commerce (Frontend)
 
 ![Angular](https://img.shields.io/badge/Angular_21-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
@@ -6,36 +6,36 @@
 ![Keycloak](https://img.shields.io/badge/OAuth2_/_OIDC-Keycloak-4D4D4D?style=for-the-badge&logo=keycloak&logoColor=white)
 ![CSS3](https://img.shields.io/badge/Responsive_UI-CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-Single Page Application (SPA) sviluppata con **Angular 21.1.4** per **LuxuryTime**, boutique digitale dedicata alla compravendita di orologi di alta gamma (Rolex, Patek Philippe, Audemars Piguet, Omega).
+Single Page Application (SPA) sviluppata con **Angular 21.1.4** per **LuxuryTime**, boutique digitale dedicata alla compravendita di orologi di lusso (Rolex, Patek Philippe, Audemars Piguet, Omega).
 
-🔗 **Repository Backend (Spring Boot):** [LuxuryTime-Backend](https://github.com/M4ik0l/LuxuryTime-Backend)
+**Repository Backend (Spring Boot):** [LuxuryTime-Backend](https://github.com/M4ik0l/LuxuryTime-Backend)
 
 ---
 
-## ✨ Architettura e Funzionalità Principali
+## Architettura e Funzionalità Principali
 
 * **🛍️ Catalogo Interattivo & Ricerca Avanzata:**
     * Esplorazione del catalogo con filtri dinamici per brand, fascia di prezzo, categoria e disponibilità in tempo reale.
     * Pagina di dettaglio prodotto con galleria immagini e indicatori dinamici di scorte limitate.
 
-* **🛒 Carrello Reattivo con Prenotazione Stock:**
+* **Carrello Reattivo con Prenotazione Stock:**
     * Gestione reattiva dello stato del carrello tramite **RxJS ("BehaviorSubject")** sincronizzato con il backend.
     * Controllo rigoroso delle quantità massime acquistabili in base allo stock residuo e gestione degli errori di concorrenza.
 
-* **🔐 Sicurezza OAuth2 / JWT & Role-Based Access Control:**
+* **Sicurezza OAuth2 / JWT & Role-Based Access Control:**
     * Login, registrazione e gestione sessione integrati con **Keycloak**.
     * **HTTP Interceptor** e gestione degli header "Authorization: Bearer" per le chiamate API protette.
     * **Route Guards** per proteggere le rotte riservate agli utenti autenticati ("USER") e il pannello di amministrazione ("ADMIN").
 
-* **🛠️ Dashboard Amministratore:**
+* **Dashboard Amministratore:**
     * Interfaccia dedicata per la creazione, modifica della disponibilità/prezzo, rimozione dei prodotti dal catalogo e aggiornamento dello stato degli ordini.
 
-* **📦 Area Personale, Rubrica Indirizzi & Checkout:**
+* **Area Personale, Rubrica Indirizzi & Checkout:**
     * Gestione degli indirizzi di spedizione, riepilogo ordine e consultazione dello storico acquisti.
 
 ---
 
-## 🛠️ Stack Tecnologico
+## Stack Tecnologico
 
 * **Framework:** Angular 21.1.4 (Standalone Components Architecture)
 * **Linguaggio:** TypeScript
@@ -45,7 +45,7 @@ Single Page Application (SPA) sviluppata con **Angular 21.1.4** per **LuxuryTime
 
 ---
 
-## 🚀 Configurazione e Avvio Rapido
+## onfigurazione e Avvio Rapido
 
 ### 1. Prerequisiti
 * **Node.js** e **npm**
